@@ -1,0 +1,38 @@
+{
+    "$id": "c_backgroundColor",
+    "$schema": "https://schema.yext.com/config/km/field/v1",
+    "displayName": "Background Color",
+    "group": "NONE",
+    "localization": "PRIMARY_ONLY",
+    "type": {
+      "optionType": {
+        "option": [
+          {
+            "displayName": "Azure",
+            "textValue": "AZURE"
+          },
+          {
+            "displayName": "White",
+            "textValue": "WHITE"
+          },
+          {
+            "displayName": "Floral White",
+            "textValue": "FLORAL_WHITE"
+          },
+          {
+            "displayName": "Light Yellow",
+            "textValue": "LIGHT_YELLOW"
+          },
+          {
+            "displayName": "Honey Dew",
+            "textValue": "HONEY_DEW"
+          },
+          {
+            "displayName": "Lavender Blush",
+            "textValue": "LAVENDER_BLUSH"
+          }
+        ]
+      }
+    },
+    "typeId": "option"
+  }

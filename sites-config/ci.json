@@ -1,0 +1,42 @@
+{
+  "artifactStructure": {
+    "assets": [
+      {
+        "root": "dist",
+        "pattern": "assets/**/*"
+      }
+    ],
+    "features": "sites-config/features.json",
+    "plugins": [
+      {
+        "pluginName": "PagesGenerator",
+        "sourceFiles": [
+          {
+            "root": "dist/plugin",
+            "pattern": "*{.ts,.json}"
+          },
+          {
+            "root": "dist",
+            "pattern": "assets/{server,static,renderer,render}/**/*{.js,.css}"
+          }
+        ],
+        "event": "ON_PAGE_GENERATE",
+        "functionName": "PagesGenerator"
+      }
+    ]
+  },
+  "dependencies": {
+    "installDepsCmd": "npm install",
+    "requiredFiles": [
+      "package.json",
+      "package-lock.json",
+      ".npmrc"
+    ]
+  },
+  "buildArtifacts": {
+    "buildCmd": "npm run build:local"
+  },
+  "livePreview": {
+    "serveSetupCmd": ":"
+  }
+}
