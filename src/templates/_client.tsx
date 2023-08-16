@@ -16,7 +16,6 @@ const render = async (pageContext: PageContext<any>) => {
     backgroundColor = `--backgroundColor: white`;
   }
 
-  console.log(pageProps);
   ReactDOM.hydrate(
     <Page {...pageProps}>
         <style>:root {`{${backgroundColor}}`}</style>    
