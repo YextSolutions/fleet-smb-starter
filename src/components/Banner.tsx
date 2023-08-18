@@ -1,7 +1,5 @@
 import * as React from "react";
-import { Address } from "../types/Address";
-import Cta from "./Cta";
-import { Image } from "@yext/react-components";
+import { Image } from "@yext/sites-components";
 
 export interface BannerProps {
   name?: string;
