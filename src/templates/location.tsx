@@ -19,6 +19,7 @@ import Carousel from "../components/Carousel";
 import Hours from "../components/Hours";
 import PageLayout from "../components/PageLayout";
 import Schema from "../components/Schema";
+import ContactSection from "../components/ContactSection";
 
 
 
@@ -131,6 +132,7 @@ const Location: Template<TemplateRenderProps> = ({
         <About description={description} />
         {hours && <Hours title={"Hours"} hours={hours} />}
         <Carousel title={"Gallery"} photoGallery={photoGallery}></Carousel>
+        <ContactSection address={address} phone={mainPhone} email={emails} />
       </PageLayout>
     </>
   );

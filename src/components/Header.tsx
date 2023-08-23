@@ -14,6 +14,7 @@ const navigation = [
   { name: "About", href: "#about" },
   { name: "Hours", href: "#hours" },
   { name: "Gallery", href: "#gallery" },
+  { name: "Contact", href: "#contact" },
 ];
 
 const Header = ({ data }: HeaderProps) => {
