@@ -118,20 +118,22 @@ const ContactSection = ({ address, phone, email }: ContactSectionProps) => {
             <tbody className="">
               {address &&               
                 <tr className="h-14">
+                    <span className="sr-only">Address</span>
                     <td className="pr-10">
                       <BuildingOffice2Icon className="h-7 w-6 text-gray-400" aria-hidden="true" />
                     </td>
                     <td className="">
-                      <dd>
+                      <div>
                         {address.line1}
                         <br />
                         {address.city}, {address.region} {address.postalCode}
-                      </dd>
+                      </div>
                     </td>
                 </tr>
               }
               {phone && 
                 <tr className="h-14">
+                  <span className="sr-only">Phone</span>
                   <td>
                     <PhoneIcon className="h-7 w-6 text-gray-400" aria-hidden="true" />
                   </td>
@@ -144,13 +146,14 @@ const ContactSection = ({ address, phone, email }: ContactSectionProps) => {
               }
               {email &&               
                 <tr className="h-14">
+                    <span className="sr-only">Email</span>
                     <td>
-                    <EnvelopeIcon className="h-7 w-6 text-gray-400" aria-hidden="true" />
+                      <EnvelopeIcon className="h-7 w-6 text-gray-400" aria-hidden="true" />
                     </td>
                     <td>
-                    <a className="hover:text-gray-900" href="mailto:hello@example.com">
-                    {email[0]}
-                  </a>
+                      <a className="hover:text-gray-900" href="mailto:hello@example.com">
+                        {email[0]}
+                      </a>
                     </td>
                 </tr>
               }
