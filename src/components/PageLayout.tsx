@@ -21,10 +21,6 @@ const PageLayout = ({ children, data, templateData }: PageLayoutProps) => {
     backgroundColor = `--backgroundColor: white`;
   }
 
-  // console.log(templateData);
-  if (YEXT_PUBLIC_DOMAIN) {
-    templateData.document.siteDomain = YEXT_PUBLIC_DOMAIN;
-  }
 
   return (
     <>
