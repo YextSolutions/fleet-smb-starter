@@ -128,7 +128,7 @@ const Location: Template<TemplateRenderProps> = ({
         {hours && <Hours title={"Hours"} hours={hours} />}
         <Carousel title={"Gallery"} photoGallery={photoGallery}></Carousel>
         <ContactSection address={address} phone={mainPhone} email={emails} />
-        <SocialPostsGallery entityId={id} />
+        <SocialPostsGallery entityId={id} entityName={name} />
       </PageLayout>
     </>
   );

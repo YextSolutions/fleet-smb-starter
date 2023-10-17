@@ -10,9 +10,10 @@ const SocialPost = ({ post }: SocialPostProps) => {
 
   return (
     <div className="w-64 h-64 relative group">
-      <div className="absolute inset-0 bg-slate-400 opacity-0 group-hover:opacity-20"></div>
-      <div className="text-base text-white opacity-0 group-hover:opacity-20">
-        {post.text}
+      <div className="absolute inset-0 bg-slate-400 opacity-0 group-hover:opacity-20">
+        <div className="text-base text-white opacity-0 group-hover:opacity-20">
+          {post.text}
+        </div>
       </div>
       <img
         className="h-full w-full object-cover object-center"
