@@ -1,4 +1,3 @@
-import * as React from "react";
 import {
   GetHeadConfig,
   GetPath,
@@ -21,6 +20,7 @@ import PageLayout from "../components/PageLayout";
 import Schema from "../components/Schema";
 import ContactSection from "../components/ContactSection";
 import SocialPostsGallery from "../components/SocialPostsGallery";
+import Reviews from "../components/Reviews";
 
 export const config: TemplateConfig = {
   stream: {
@@ -128,6 +128,7 @@ const Location: Template<TemplateRenderProps> = ({
         {hours && <Hours title={"Hours"} hours={hours} />}
         <Carousel title={"Gallery"} photoGallery={photoGallery}></Carousel>
         <ContactSection address={address} phone={mainPhone} email={emails} />
+        <Reviews entityId={id} />
         <SocialPostsGallery entityId={id} entityName={name} />
       </PageLayout>
     </>

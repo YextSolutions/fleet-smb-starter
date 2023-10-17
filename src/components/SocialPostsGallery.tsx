@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { SocialPostsResponse } from "../types";
+import { YextResponse, SocialPost } from "../types";
 
 export interface SocialPostsGalleryProps {
   entityId: string;
@@ -9,7 +9,7 @@ export interface SocialPostsGalleryProps {
 const fetchSocialPosts = async (
   entityId: string,
   entityName?: string
-): Promise<SocialPostsResponse> => {
+): Promise<YextResponse<{ posts: SocialPost[] }>> => {
   const response = await fetch(`/api/entity/${entityId}/posts`);
   const json = await response.json();
   return json;
@@ -35,7 +35,7 @@ const SocialPostsGallery = ({
   if (error) return <p>Error :</p>;
 
   return (
-    <div className="bg-gray-100 px-6 py-20 lg:px-8">
+    <div className="px-6 py-20 lg:px-8">
       {entityName && (
         <h3 className="text-center font-bold text-3xl">
           {formatHandle(entityName ? entityName : "Social Media")}{" "}

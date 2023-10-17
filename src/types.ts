@@ -21,12 +21,27 @@ export interface SocialPost {
   }[];
 }
 
-export interface SocialPostsResponse {
+export interface YextResponse<T> {
   meta: {
     uuid: string;
     errors: unknown[];
   };
-  response: {
-    posts: SocialPost[];
-  };
+  response: T;
 }
+
+export type ReviewsResponse = {
+  count: number;
+  docs: {
+    $key: {
+      locale: string;
+      primaryKey: string;
+    };
+    authorName: string;
+    content: string;
+    rating: number;
+    reviewDate: string;
+    entity: {
+      id: string;
+    };
+  }[];
+};
