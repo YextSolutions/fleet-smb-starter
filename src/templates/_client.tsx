@@ -1,17 +1,25 @@
+import * as ReactDOM from "react-dom";
+import * as React from "react";
 import { PageContext } from "@yext/pages";
-import { hydrateRoot } from "react-dom/client";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export { render };
 
-const queryClient = new QueryClient();
-
 const render = async (pageContext: PageContext<any>) => {
   const { Page, pageProps } = pageContext;
-  hydrateRoot(
-    document.getElementById("reactele"),
-    <QueryClientProvider client={queryClient}>
-      <Page {...pageProps} />
-    </QueryClientProvider>
+
+  let backgroundColor;
+
+  if (pageProps.document.c_backgroundColor) {
+    const transformedColor = pageProps.document.c_backgroundColor.replace(/\s+/g, '').toLowerCase();
+    backgroundColor = `--backgroundColor: ${transformedColor}`;
+  } else {
+    backgroundColor = `--backgroundColor: white`;
+  }
+
+  ReactDOM.hydrate(
+    <Page {...pageProps}>
+        <style>:root {`{${backgroundColor}}`}</style>    
+    </Page>,
+    document.getElementById("reactele")
   );
 };
