@@ -53,6 +53,7 @@ const NextArrow = ({ className, style, onClick }: ArrowProps) => {
 const Carousel = ({ title, photoGallery }: CarouselProps) => {
   let dummyPhotos = [
     {
+        "test": true,
         "description": "Placeholder Image",
         "details": "Placeholder Image",
         "image": {
@@ -63,6 +64,7 @@ const Carousel = ({ title, photoGallery }: CarouselProps) => {
         }
     },
     {
+        "test": true,
         "description": "Placeholder Image",
         "details": "Placeholder Image",
         "image": {
@@ -73,6 +75,7 @@ const Carousel = ({ title, photoGallery }: CarouselProps) => {
         }
     },
     {
+        "test": true,
         "description": "Placeholder Image",
         "details": "Placeholder Image",
         "image": {
@@ -85,7 +88,7 @@ const Carousel = ({ title, photoGallery }: CarouselProps) => {
   ];
   if (!photoGallery) {
     photoGallery = dummyPhotos;
-  } else if (photoGallery.length == 1) {
+  } else if (photoGallery.length < 3) {
     photoGallery = photoGallery.concat(dummyPhotos);
   } 
 //   console.log("photo gallery array after manipulation");
@@ -93,8 +96,12 @@ const Carousel = ({ title, photoGallery }: CarouselProps) => {
   const photoDivs = photoGallery.map((e) => (
     <div key={e.image.url} className="self-center hover:drop-shadow-lg sm:px-2">
       <a href={e.image.url} target="_blank" rel="noreferrer">
-        <Image image={e.image} className="rounded-md" />
-        {/* <img src={e.image.url} className="rounded-md"></img> */}
+        {e.test ? (
+            <img src={e.image.url} className="rounded-md"></img>
+          ) : (
+            <Image image={e.image} className="rounded-md" />
+          )
+        }
       </a>
     </div>
   ));
