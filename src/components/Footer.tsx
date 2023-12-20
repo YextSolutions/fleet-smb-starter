@@ -6,7 +6,7 @@ import {
   Twitter,
   YouTube,
 } from "../assets/svgs/SocialIcons";
-import { Link } from "@yext/sites-components";
+import { Link } from "@yext/pages-components";
 
 export interface FooterProps {
   _site?: any;

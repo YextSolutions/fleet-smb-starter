@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { Dialog } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { formatPhoneNumber } from "react-phone-number-input";
-import { Image } from "@yext/sites-components";
-import { Link } from "@yext/sites-components";
+import { Image } from "@yext/pages-components";
+import { Link } from "@yext/pages-components";
 
 export interface HeaderProps {
   data?: any;

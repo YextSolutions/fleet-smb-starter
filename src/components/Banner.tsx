@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Image } from "@yext/sites-components";
+import { Image } from "@yext/pages-components";
 
 export interface BannerProps {
   name?: string;
