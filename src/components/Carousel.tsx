@@ -2,7 +2,7 @@ import * as React from "react";
 import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Image } from "@yext/sites-components";
+import { Image } from "@yext/pages-components";
 import { useState, useCallback, useEffect } from 'react';
 import { BiCaretRightCircle, BiCaretLeftCircle } from "react-icons/bi";
 
@@ -183,13 +183,15 @@ const Carousel = ({ title, photoGallery }: CarouselProps) => {
  
 
   const isBreakpoint = useMediaQuery(768);
+  // @ts-ignore
+  const SliderComponent = typeof window === 'undefined' ? Slider.default : Slider;
   return (
     <>
         <div className="mx-auto px-5 md:px-14 bg-gray-100 pt-8 pb-24">
           <h2 className="section text-3xl text-center tracking-tight font-bold">
             <a id="gallery">{title}</a>
           </h2>
-          <Slider {...settings} className="drop-shadow sm:px-3 sm:mx-3  md:px-5">{photoDivs}</Slider> 
+          <SliderComponent {...settings} className="drop-shadow sm:px-3 sm:mx-3  md:px-5">{photoDivs}</SliderComponent> 
         </div>
     </>
   );
