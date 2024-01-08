@@ -21,8 +21,6 @@ import PageLayout from "../components/PageLayout";
 import Schema from "../components/Schema";
 import ContactSection from "../components/ContactSection";
 
-
-
 export const config: TemplateConfig = {
   stream: {
     $id: "Location",
@@ -45,30 +43,27 @@ export const config: TemplateConfig = {
       "paymentOptions",
       "emails",
       "yextDisplayCoordinate",
-      "c_backgroundColor"
+      "c_backgroundColor",
     ],
     localization: {
       locales: [YEXT_PUBLIC_LOCATION_LOCALE_CODE],
-      primary: false,
     },
     transform: {
       replaceOptionValuesWithDisplayNames: [
         "paymentOptions",
-        "c_backgroundColor"
+        "c_backgroundColor",
       ],
     },
   },
 };
 
-
 export const getPath: GetPath<TemplateProps> = ({ document }) => {
   return document.slug ? document.slug : `index.html`;
 };
 
-
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
   document,
-  relativePrefixToRoot
+  relativePrefixToRoot,
 }): HeadConfig => {
   return {
     title: document.name,
@@ -86,7 +81,9 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
         type: "meta", // Meta Tag (og:image)
         attributes: {
           property: "og:image",
-          content: (document.photoGallery ? document.photoGallery[0].image.url : null),
+          content: document.photoGallery
+            ? document.photoGallery[0].image.url
+            : null,
         },
       },
       {
@@ -100,8 +97,6 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
     ],
   };
 };
-
-
 
 const Location: Template<TemplateRenderProps> = ({
   __meta,
@@ -119,15 +114,15 @@ const Location: Template<TemplateRenderProps> = ({
     logo,
     photoGallery,
     yextDisplayCoordinate,
-    c_backgroundColor
+    c_backgroundColor,
   } = document;
 
-  const data = { mainPhone, emails, logo, c_backgroundColor }
+  const data = { mainPhone, emails, logo, c_backgroundColor };
 
   return (
     <>
       <Schema data={document} />
-      <PageLayout data={data} templateData={{__meta, document}}>
+      <PageLayout data={data} templateData={{ __meta, document }}>
         <Banner name={name} photoGallery={photoGallery} />
         <About description={description} />
         {hours && <Hours title={"Hours"} hours={hours} />}

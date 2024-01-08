@@ -1,0 +1,2 @@
+declare var YEXT_PUBLIC_LOCATION_ENTITY_ID: string;
+declare var YEXT_PUBLIC_LOCATION_LOCALE_CODE: string;
