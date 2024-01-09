@@ -1,11 +1,9 @@
 import * as React from "react";
-import Slider, { Settings } from "react-slick";
+import { Settings } from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Image } from "@yext/pages-components";
-import { useState, useCallback, useEffect } from "react";
 import { BiCaretRightCircle, BiCaretLeftCircle } from "react-icons/bi";
-import { getRuntime } from "@yext/pages/util";
 
 export interface CarouselProps {
   title?: string;
@@ -104,32 +102,6 @@ const Carousel = ({ title, photoGallery }: CarouselProps) => {
     </div>
   ));
 
-  const useMediaQuery = (width: number) => {
-    const [targetReached, setTargetReached] = useState(false);
-
-    const updateTarget = useCallback((e) => {
-      if (e.matches) {
-        setTargetReached(true);
-      } else {
-        setTargetReached(false);
-      }
-    }, []);
-
-    useEffect(() => {
-      const media = window.matchMedia(`(max-width: ${width}px)`);
-      media.addEventListener("change", updateTarget);
-
-      // Check on mount (callback is not called until a change occurs)
-      if (media.matches) {
-        setTargetReached(true);
-      }
-
-      return () => media.removeEventListener("change", updateTarget);
-    }, []);
-
-    return targetReached;
-  };
-
   const settings: Settings = {
     dots: true,
     arrows: true,
@@ -138,7 +110,7 @@ const Carousel = ({ title, photoGallery }: CarouselProps) => {
     slidesToShow: 3,
     slidesToScroll: 1,
     initialSlide: 0,
-    lazyLoad: true,
+    lazyLoad: "ondemand",
     swipeToSlide: false,
     prevArrow: <PrevArrow className="" />,
     nextArrow: <NextArrow className="" />,
@@ -177,12 +149,7 @@ const Carousel = ({ title, photoGallery }: CarouselProps) => {
     ],
   };
 
-  let SliderComponent = Slider;
-
-  if (getRuntime().name !== "browser") {
-    // @ts-ignore
-    SliderComponent = Slider.default;
-  }
+  const SliderComponent = asyncComponent(() => import("react-slick"));
 
   return (
     <>
@@ -202,3 +169,40 @@ const Carousel = ({ title, photoGallery }: CarouselProps) => {
 };
 
 export default Carousel;
+
+function asyncComponent(
+  importComponent: () => Promise<any>,
+  componentName: string = "default"
+) {
+  class AsyncComponent extends React.Component<any, any> {
+    constructor(props: React.JSX.Element) {
+      super(props);
+
+      this.state = {
+        component: null,
+      };
+    }
+
+    async componentDidMount() {
+      const component = await importComponent();
+
+      if (!component[componentName]) {
+        console.error(
+          `Exported function "${componentName}" does not exist for dynamic import: ${importComponent}`
+        );
+      }
+
+      this.setState({
+        component: component[componentName],
+      });
+    }
+
+    render() {
+      const C = this.state.component;
+
+      return C ? <C {...this.props} /> : null;
+    }
+  }
+
+  return AsyncComponent;
+}
