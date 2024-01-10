@@ -4,6 +4,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Image } from "@yext/pages-components";
 import { BiCaretRightCircle, BiCaretLeftCircle } from "react-icons/bi";
+import Slider from "react-slick";
+import { getRuntime, isProduction } from "@yext/pages/util";
 
 export interface CarouselProps {
   title?: string;
@@ -149,7 +151,15 @@ const Carousel = ({ title, photoGallery }: CarouselProps) => {
     ],
   };
 
-  const SliderComponent = asyncComponent(() => import("react-slick"));
+  // const SliderComponent = dynamic(() => import("react-slick"));
+  const SliderComponent =
+    // @ts-ignore
+    getRuntime().name === "node" ? Slider.default : Slider;
+  // const SliderComponent =
+  //   typeof window === "undefined" ? Slider.default : Slider;
+  // const SliderComponent = Slider;
+  // const SliderComponent = Slider.default;
+  // console.log(Slider);
 
   return (
     <>
@@ -170,10 +180,30 @@ const Carousel = ({ title, photoGallery }: CarouselProps) => {
 
 export default Carousel;
 
-function asyncComponent(
+type DynamicOptions = {
+  componentName?: string;
+  loading?: () => React.JSX.Element;
+};
+
+/**
+ * const SliderComponent = dynamic(() => import("react-slick"), {
+ *   loading: () => <h1>hi</h1>,
+ * });
+ *
+ * @param importComponent
+ * @param options
+ * @returns
+ */
+function dynamic(
   importComponent: () => Promise<any>,
-  componentName: string = "default"
+  options?: DynamicOptions
 ) {
+  const resolvedOptions = {
+    componentName: "default",
+    loading: () => <></>,
+    ...options,
+  };
+
   class AsyncComponent extends React.Component<any, any> {
     constructor(props: React.JSX.Element) {
       super(props);
@@ -186,21 +216,21 @@ function asyncComponent(
     async componentDidMount() {
       const component = await importComponent();
 
-      if (!component[componentName]) {
+      if (!component[resolvedOptions.componentName]) {
         console.error(
-          `Exported function "${componentName}" does not exist for dynamic import: ${importComponent}`
+          `Exported function "${resolvedOptions.componentName}" does not exist for dynamic import: ${importComponent}`
         );
       }
 
       this.setState({
-        component: component[componentName],
+        component: component[resolvedOptions.componentName],
       });
     }
 
     render() {
       const C = this.state.component;
 
-      return C ? <C {...this.props} /> : null;
+      return C ? <C {...this.props} /> : resolvedOptions.loading();
     }
   }
 
