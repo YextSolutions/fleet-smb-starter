@@ -131,7 +131,7 @@ const Location: Template<TemplateRenderProps> = ({
         <Banner name={name} photoGallery={photoGallery} />
         <About description={description} />
         {hours && <Hours title={"Hours"} hours={hours} />}
-        <Carousel title={"Gallery"} photoGallery={photoGallery}></Carousel>
+        {/* <Carousel title={"Gallery"} photoGallery={photoGallery}></Carousel> */}
         <ContactSection address={address} phone={mainPhone} email={emails} />
       </PageLayout>
     </>
